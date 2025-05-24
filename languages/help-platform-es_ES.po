@@ -1,0 +1,64 @@
+# Copyright (C) 2024 HELP Team
+msgid ""
+msgstr ""
+"Project-Id-Version: HELP 全球生活服务平台 1.0.0\n"
+"Report-Msgid-Bugs-To: https://help-platform.com\n"
+"POT-Creation-Date: 2024-03-21 12:00+0800\n"
+"PO-Revision-Date: 2024-03-21 12:00+0800\n"
+"Last-Translator: HELP Team\n"
+"Language-Team: Spanish\n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "实名认证"
+msgstr "Verificación de Identidad"
+
+msgid "所有认证"
+msgstr "Todas las Verificaciones"
+
+msgid "添加认证"
+msgstr "Añadir Verificación"
+
+msgid "添加新认证"
+msgstr "Añadir Nueva Verificación"
+
+msgid "编辑认证"
+msgstr "Editar Verificación"
+
+msgid "任务管理"
+msgstr "Gestión de Tareas"
+
+msgid "任务"
+msgstr "Tarea"
+
+msgid "所有任务"
+msgstr "Todas las Tareas"
+
+msgid "发布任务"
+msgstr "Publicar Tarea"
+
+msgid "发布新任务"
+msgstr "Publicar Nueva Tarea"
+
+msgid "编辑任务"
+msgstr "Editar Tarea"
+
+msgid "待审核"
+msgstr "Pendiente de Revisión"
+
+msgid "待审核 <span class=\"count\">(%s)</span>"
+msgid_plural "待审核 <span class=\"count\">(%s)</span>"
+msgstr[0] "Pendiente de Revisión <span class=\"count\">(%s)</span>"
+msgstr[1] "Pendiente de Revisión <span class=\"count\">(%s)</span>"
+
+msgid "提交成功，等待审核"
+msgstr "Enviado con éxito, pendiente de revisión"
+
+msgid "提交失败，请重试"
+msgstr "Error al enviar, por favor intente de nuevo"
+
+msgid "获取位置信息失败"
+msgstr "Error al obtener la información de ubicación" 

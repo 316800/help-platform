@@ -1,0 +1,48 @@
+# WordPress 核心文件
+wp-admin/
+wp-includes/
+wp-content/uploads/
+wp-content/upgrade/
+wp-content/backup-db/
+wp-content/cache/
+wp-content/backups/
+
+# 插件特定文件
+vendor/
+node_modules/
+*.log
+.DS_Store
+Thumbs.db
+
+# IDE 和编辑器文件
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+
+# 环境配置文件
+.env
+.env.*
+!.env.example
+
+# 构建和依赖文件
+*.zip
+*.tar.gz
+composer.lock
+package-lock.json
+yarn.lock
+
+# 测试和临时文件
+/tests/
+/tmp/
+*.test.php
+phpunit.xml
+.coverage/
+.phpunit.result.cache
+
+# 其他
+*.bak
+*.tmp
+*.temp 

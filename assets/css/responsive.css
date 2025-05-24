@@ -1,0 +1,210 @@
+/* HELP Platform 响应式样式 */
+
+/* 设备模式切换按钮 */
+.help-platform-device-switch {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    padding: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.help-platform-device-switch:hover {
+    transform: scale(1.1);
+}
+
+.help-platform-device-switch .dashicons {
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+    color: #333;
+}
+
+/* 移动设备模式容器 */
+.help-platform-mobile-mode {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 375px;
+    height: 667px;
+    background: #fff;
+    border: 10px solid #333;
+    border-radius: 30px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    overflow: hidden;
+    z-index: 9998;
+    transition: all 0.3s ease;
+}
+
+.help-platform-mobile-mode iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* 响应式布局基础样式 */
+.help-platform-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+    box-sizing: border-box;
+}
+
+/* 表单响应式样式 */
+.help-platform-form {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.help-platform-form .form-group {
+    margin-bottom: 20px;
+}
+
+/* 响应式网格系统 */
+.help-platform-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 20px;
+}
+
+/* 响应式断点 */
+@media screen and (max-width: 1200px) {
+    .help-platform-container {
+        max-width: 960px;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .help-platform-container {
+        max-width: 720px;
+    }
+    
+    .help-platform-grid {
+        grid-template-columns: repeat(8, 1fr);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .help-platform-container {
+        max-width: 540px;
+    }
+    
+    .help-platform-grid {
+        grid-template-columns: repeat(6, 1fr);
+    }
+    
+    .help-platform-form {
+        padding: 15px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .help-platform-container {
+        padding: 0 10px;
+    }
+    
+    .help-platform-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 15px;
+    }
+    
+    .help-platform-form .form-group {
+        margin-bottom: 15px;
+    }
+}
+
+/* 移动设备特定样式 */
+.help-platform-mobile-mode .help-platform-container {
+    max-width: 100%;
+    padding: 0 10px;
+}
+
+.help-platform-mobile-mode .help-platform-form {
+    padding: 10px;
+}
+
+.help-platform-mobile-mode .help-platform-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+/* 任务列表响应式样式 */
+.help-platform-job-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+@media screen and (max-width: 768px) {
+    .help-platform-job-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* 图片响应式处理 */
+.help-platform-image {
+    max-width: 100%;
+    height: auto;
+}
+
+.help-platform-image-preview {
+    max-width: 100%;
+    overflow: hidden;
+}
+
+/* 按钮响应式样式 */
+.help-platform-button {
+    width: 100%;
+    max-width: 200px;
+    padding: 10px 20px;
+    margin: 10px 0;
+}
+
+@media screen and (max-width: 576px) {
+    .help-platform-button {
+        max-width: 100%;
+    }
+}
+
+/* 导航菜单响应式样式 */
+.help-platform-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+@media screen and (max-width: 768px) {
+    .help-platform-nav {
+        flex-direction: column;
+    }
+    
+    .help-platform-nav-item {
+        width: 100%;
+    }
+}
+
+/* 表格响应式处理 */
+.help-platform-table {
+    width: 100%;
+    overflow-x: auto;
+    display: block;
+}
+
+@media screen and (max-width: 768px) {
+    .help-platform-table {
+        font-size: 14px;
+    }
+    
+    .help-platform-table th,
+    .help-platform-table td {
+        padding: 8px;
+    }
+} 

@@ -1,0 +1,92 @@
+# Copyright (C) 2024 HELP Team
+msgid ""
+msgstr ""
+"Project-Id-Version: HELP 全球生活服务平台 1.0.0\n"
+"Report-Msgid-Bugs-To: https://help-platform.com\n"
+"POT-Creation-Date: 2024-03-21 12:00+0800\n"
+"PO-Revision-Date: 2024-03-21 12:00+0800\n"
+"Last-Translator: HELP Team\n"
+"Language-Team: HELP Team\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: help-platform.php:31
+msgid "实名认证"
+msgstr ""
+
+#: help-platform.php:32
+msgid "实名认证"
+msgstr ""
+
+#: help-platform.php:33
+msgid "实名认证"
+msgstr ""
+
+#: help-platform.php:34
+msgid "所有认证"
+msgstr ""
+
+#: help-platform.php:35
+msgid "添加认证"
+msgstr ""
+
+#: help-platform.php:36
+msgid "添加新认证"
+msgstr ""
+
+#: help-platform.php:37
+msgid "编辑认证"
+msgstr ""
+
+#: help-platform.php:52
+msgid "任务管理"
+msgstr ""
+
+#: help-platform.php:53
+msgid "任务"
+msgstr ""
+
+#: help-platform.php:54
+msgid "任务管理"
+msgstr ""
+
+#: help-platform.php:55
+msgid "所有任务"
+msgstr ""
+
+#: help-platform.php:56
+msgid "发布任务"
+msgstr ""
+
+#: help-platform.php:57
+msgid "发布新任务"
+msgstr ""
+
+#: help-platform.php:58
+msgid "编辑任务"
+msgstr ""
+
+#: help-platform.php:77
+msgid "待审核"
+msgstr ""
+
+#: help-platform.php:82
+msgid "待审核 <span class=\"count\">(%s)</span>"
+msgid_plural "待审核 <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: help-platform.php:120
+msgid "提交成功，等待审核"
+msgstr ""
+
+#: help-platform.php:121
+msgid "提交失败，请重试"
+msgstr ""
+
+#: help-platform.php:122
+msgid "获取位置信息失败"
+msgstr "" 
