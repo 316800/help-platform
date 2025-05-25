@@ -3,7 +3,7 @@
  * Plugin Name: HELP 全球生活服务平台
  * Plugin URI: https://help-platform.com
  * Description: HELP 全球生活服务平台插件，支持实名认证、任务发布、前端短代码调用与后台审核管理
- * Version: 1.0.1
+ * Version: 1.0.2
  * Author: HELP Team
  * Author URI: https://help-platform.com
  * Text Domain: help-platform
@@ -17,7 +17,7 @@ if (!defined('ABSPATH')) {
 }
 
 // 定义插件常量
-define('HELP_PLATFORM_VERSION', '1.0.1');
+define('HELP_PLATFORM_VERSION', '1.0.2');
 define('HELP_PLATFORM_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('HELP_PLATFORM_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('HELP_PLATFORM_PLUGIN_BASENAME', plugin_basename(__FILE__));
