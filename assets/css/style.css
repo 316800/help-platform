@@ -3,47 +3,225 @@
  */
 
 /* 通用样式 */
+.help-platform-message {
+    padding: 15px 20px;
+    margin: 20px 0;
+    border-radius: 8px;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.help-platform-message.success {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border-left: 4px solid #2e7d32;
+}
+
+.help-platform-message.warning {
+    background-color: #fff3e0;
+    color: #ef6c00;
+    border-left: 4px solid #ef6c00;
+}
+
+.help-platform-message.error {
+    background-color: #ffebee;
+    color: #c62828;
+    border-left: 4px solid #c62828;
+}
+
+/* 表单样式 */
 .help-platform-verify-form,
 .help-platform-job-form {
     max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
+    margin: 30px auto;
+    padding: 30px;
     background: #fff;
-    border-radius: 4px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
     font-weight: 600;
+    color: #333;
+    font-size: 15px;
 }
 
 .form-group input[type="text"],
-.form-group input[type="email"],
+.form-group input[type="tel"],
+.form-group input[type="number"],
+.form-group input[type="date"],
 .form-group textarea {
     width: 100%;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    background-color: #f8f9fa;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="tel"]:focus,
+.form-group input[type="number"]:focus,
+.form-group input[type="date"]:focus,
+.form-group textarea:focus {
+    border-color: #2196f3;
+    background-color: #fff;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(33,150,243,0.1);
 }
 
 .form-group textarea {
-    min-height: 100px;
+    min-height: 120px;
+    resize: vertical;
 }
 
-.form-group small {
-    display: block;
-    margin-top: 5px;
+.form-group .required {
+    color: #f44336;
+    margin-left: 4px;
+}
+
+.form-group .description {
+    margin-top: 6px;
+    font-size: 13px;
     color: #666;
 }
 
-.required {
-    color: #dc3232;
+.form-group button {
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+}
+
+.form-group button.button-primary {
+    background: #2196f3;
+    color: #fff;
+}
+
+.form-group button.button-primary:hover {
+    background: #1976d2;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.form-group button.button-primary:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+/* 表单验证样式 */
+.form-group input.error,
+.form-group textarea.error {
+    border-color: #f44336;
+    background-color: #fff;
+}
+
+.form-group .error-message {
+    color: #f44336;
+    font-size: 13px;
+    margin-top: 6px;
+}
+
+/* 响应式设计 */
+@media screen and (max-width: 768px) {
+    .help-platform-verify-form,
+    .help-platform-job-form {
+        margin: 15px;
+        padding: 20px;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="tel"],
+    .form-group input[type="number"],
+    .form-group input[type="date"],
+    .form-group textarea {
+        font-size: 16px; /* 防止 iOS 缩放 */
+    }
+
+    .form-group button {
+        width: 100%;
+        margin-top: 10px;
+    }
+}
+
+/* 后台样式优化 */
+.help-platform-admin .card {
+    background: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 25px;
+    margin: 25px 0;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.help-platform-admin .card h2 {
+    margin-top: 0;
+    color: #333;
+    font-size: 20px;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.help-platform-admin .card ul {
+    margin: 15px 0 15px 20px;
+    padding: 0;
+}
+
+.help-platform-admin .card li {
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.help-platform-admin .card code {
+    background: #f8f9fa;
+    padding: 4px 8px;
+    border-radius: 4px;
+    color: #2196f3;
+    font-size: 14px;
+}
+
+/* 设置页面样式 */
+.form-table th {
+    padding: 20px 10px 20px 0;
+    width: 200px;
+    font-weight: 600;
+    color: #333;
+}
+
+.form-table td {
+    padding: 20px 10px;
+}
+
+.form-table input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+.form-table input[type="email"],
+.form-table input[type="text"] {
+    width: 100%;
+    max-width: 400px;
+    padding: 8px 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 6px;
+}
+
+.form-table .description {
+    margin-top: 8px;
+    color: #666;
+    font-style: italic;
 }
 
 /* 图片预览 */
@@ -120,47 +298,6 @@
     background: #006291;
     border-color: #004b6b;
     color: #fff;
-}
-
-/* 响应式设计 */
-@media screen and (max-width: 782px) {
-    .help-platform-verify-form,
-    .help-platform-job-form {
-        padding: 15px;
-        margin: 15px;
-    }
-
-    .form-group input[type="text"],
-    .form-group input[type="email"],
-    .form-group textarea {
-        font-size: 16px; /* 防止 iOS 缩放 */
-    }
-
-    .button {
-        width: 100%;
-        margin-bottom: 10px;
-        text-align: center;
-    }
-}
-
-/* 后台样式 */
-.help-platform-admin .card {
-    background: #fff;
-    border: 1px solid #ccd0d4;
-    border-radius: 4px;
-    padding: 20px;
-    margin: 20px 0;
-    box-shadow: 0 1px 1px rgba(0,0,0,.04);
-}
-
-.help-platform-admin .card ul {
-    margin-left: 20px;
-}
-
-.help-platform-admin .card code {
-    background: #f0f0f1;
-    padding: 3px 5px;
-    border-radius: 3px;
 }
 
 /* 任务列表样式 */

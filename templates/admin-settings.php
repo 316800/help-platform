@@ -1,15 +1,48 @@
 <?php
+if (!defined('ABSPATH')) {
+    exit;
+}
 /**
  * 后台设置页面模板
  */
 ?>
 <div class="wrap">
-    <h1><?php _e('HELP 平台设置', 'help-platform'); ?></h1>
+    <h1><?php _e('平台设置', 'help-platform'); ?></h1>
 
     <form method="post" action="">
         <?php wp_nonce_field('help_platform_settings', 'help_platform_settings_nonce'); ?>
 
         <table class="form-table">
+            <tr>
+                <th scope="row"><?php _e('实名认证', 'help-platform'); ?></th>
+                <td>
+                    <label>
+                        <input type="checkbox" name="verify_required" value="1" <?php checked($settings['verify_required']); ?>>
+                        <?php _e('发布任务前需要实名认证', 'help-platform'); ?>
+                    </label>
+                </td>
+            </tr>
+
+            <tr>
+                <th scope="row"><?php _e('任务审核', 'help-platform'); ?></th>
+                <td>
+                    <label>
+                        <input type="checkbox" name="job_approval" value="1" <?php checked($settings['job_approval']); ?>>
+                        <?php _e('任务发布需要审核', 'help-platform'); ?>
+                    </label>
+                </td>
+            </tr>
+
+            <tr>
+                <th scope="row"><?php _e('支付功能', 'help-platform'); ?></th>
+                <td>
+                    <label>
+                        <input type="checkbox" name="payment_enabled" value="1" <?php checked($settings['payment_enabled']); ?>>
+                        <?php _e('启用支付功能', 'help-platform'); ?>
+                    </label>
+                </td>
+            </tr>
+
             <tr>
                 <th scope="row"><?php _e('开放注册', 'help-platform'); ?></th>
                 <td>
@@ -69,7 +102,7 @@
             </p>
         </div>
 
-        <?php submit_button(); ?>
+        <?php submit_button(__('保存设置', 'help-platform')); ?>
     </form>
 </div>
 

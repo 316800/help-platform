@@ -1,0 +1,94 @@
+name: WordPress Plugin CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: wordpress_test
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '7.4'
+        extensions: mbstring, xml, curl, zip, gd, intl, mysql
+        coverage: xdebug
+
+    - name: Setup WordPress
+      run: |
+        wp core download --version=latest --path=/tmp/wordpress
+        wp config create --dbname=wordpress_test --dbuser=root --dbpass=root --dbhost=127.0.0.1 --path=/tmp/wordpress
+        wp core install --url=example.com --title="WordPress Test" --admin_user=admin --admin_password=admin --admin_email=admin@example.com --path=/tmp/wordpress
+        wp plugin install woocommerce --activate --path=/tmp/wordpress
+
+    - name: Install Composer Dependencies
+      run: composer install --prefer-dist --no-progress
+
+    - name: Run PHPUnit Tests
+      env:
+        WP_TESTS_DIR: /tmp/wordpress-tests-lib
+        WP_CORE_DIR: /tmp/wordpress
+      run: |
+        bash bin/install-wp-tests.sh wordpress_test root root localhost latest
+        vendor/bin/phpunit
+
+    - name: Run PHPCS
+      run: vendor/bin/phpcs
+
+  deploy:
+    needs: test
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '7.4'
+
+    - name: Install Composer Dependencies
+      run: composer install --prefer-dist --no-dev --no-progress
+
+    - name: Create Plugin ZIP
+      run: |
+        PLUGIN_VERSION=$(grep "Version:" help-platform.php | cut -d' ' -f2)
+        zip -r help-platform-$PLUGIN_VERSION.zip . -x "*.git*" "*.github*" "tests/*" "phpunit.xml" ".gitignore" "README.md" "composer.json" "composer.lock"
+
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: v${{ steps.get_version.outputs.version }}
+        release_name: Version ${{ steps.get_version.outputs.version }}
+        draft: false
+        prerelease: false
+
+    - name: Upload Release Asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./help-platform-${{ steps.get_version.outputs.version }}.zip
+        asset_name: help-platform-${{ steps.get_version.outputs.version }}.zip
+        asset_content_type: application/zip 

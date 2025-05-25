@@ -20,7 +20,8 @@ class Help_Platform_Errors {
      * 检查系统要求
      */
     public static function check_requirements() {
-        // 检查 WordPress 版本
+        // 暂时注释掉 WordPress 版本检查
+        /*
         if (version_compare(get_bloginfo('version'), '5.0', '<')) {
             self::add_error(
                 'wp_version',
@@ -28,12 +29,13 @@ class Help_Platform_Errors {
                 'error'
             );
         }
+        */
 
         // 检查 PHP 版本
-        if (version_compare(PHP_VERSION, '7.2', '<')) {
+        if (version_compare(PHP_VERSION, '7.4', '<')) {
             self::add_error(
                 'php_version',
-                __('HELP 平台插件需要 PHP 7.2 或更高版本。', 'help-platform'),
+                __('HELP 平台插件需要 PHP 7.4 或更高版本。', 'help-platform'),
                 'error'
             );
         }
