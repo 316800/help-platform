@@ -1,111 +1,148 @@
-# HELP 全球生活服务平台
+# HELP Platform WordPress插件
 
-HELP 全球生活服务平台是一个功能强大的 WordPress 插件，为生活服务平台提供完整的解决方案。
+HELP Platform是一个帮助管理分公司、工作者和任务的WordPress插件。
 
 ## 功能特点
 
-- 实名认证系统
-- 任务发布与管理
-- 工人管理
-- 财务管理
 - 分公司管理
-- 佣金系统
-- 批量导入工人
-- 转账管理
+  - 分公司信息管理
+  - 分公司佣金设置
+  - 分公司数据统计
+
+- 佣金管理
+  - 平台佣金设置
+  - 分公司佣金设置
+  - 工作者佣金设置
+  - 佣金计算
+  - 佣金记录
+  - 佣金统计
+  - 数据导出
+
+- 任务管理
+  - 任务发布
+  - 任务审核
+  - 任务状态管理
+  - 任务统计
+
+- 用户管理
+  - 实名认证
+  - 角色权限
+  - 消息通知
 
 ## 系统要求
 
-- WordPress 5.0 或更高版本
-- PHP 7.4 或更高版本
-- MySQL 5.7 或更高版本
-- WooCommerce 5.0 或更高版本
+- WordPress 5.0+
+- PHP 7.2+
+- MySQL 5.6+
 
 ## 安装说明
 
 1. 下载插件压缩包
-2. 在 WordPress 后台进入"插件 > 安装插件"
+2. 在WordPress后台进入"插件 > 安装插件"
 3. 点击"上传插件"按钮
 4. 选择下载的压缩包并上传
-5. 激活插件
-6. 在"设置 > HELP 平台"中配置插件
+5. 上传完成后点击"启用插件"
 
 ## 使用说明
 
-### 实名认证
-- 使用短代码 `[help_verify]` 显示认证表单
-- 支持身份证照片和自拍照片上传
-- 后台审核认证申请
+### 分公司管理
+
+1. 在后台菜单中点击"HELP Platform > 分公司管理"
+2. 点击"添加分公司"创建新分公司
+3. 填写分公司信息并保存
+4. 在分公司列表中可以查看、编辑、删除分公司
+
+### 佣金设置
+
+1. 在分公司详情页面点击"佣金设置"
+2. 设置平台佣金比例
+3. 设置分公司佣金比例
+4. 设置工作者佣金比例
+5. 设置最低/最高佣金金额
+6. 设置税率
+7. 点击保存
+
+### 佣金统计
+
+1. 在后台菜单中点击"HELP Platform > 佣金统计"
+2. 选择分公司、日期范围和状态进行筛选
+3. 查看佣金统计数据
+4. 点击"导出数据"下载CSV文件
 
 ### 任务管理
-- 使用短代码 `[help_job]` 显示任务发布表单
-- 支持任务分类、地点标记
-- 工人可申请接单
-- 完整的任务状态管理
 
-### 财务管理
-- 支持充值、提现
-- 佣金自动计算
-- 分公司独立财务
-- 转账管理
-- 财务报表导出
+1. 在后台菜单中点击"HELP Platform > 任务管理"
+2. 点击"发布任务"创建新任务
+3. 填写任务信息并保存
+4. 在任务列表中可以查看、编辑、删除任务
 
-### 工人管理
-- 批量导入工人信息
-- 工人资质管理
-- 技能标签
-- 工作经验记录
+### 实名认证
+
+1. 在页面中插入`[help_verify]`短代码
+2. 用户填写认证信息并提交
+3. 管理员在后台审核认证信息
+4. 审核通过后用户可以发布任务
 
 ## 开发说明
 
 ### 目录结构
+
 ```
 help-platform/
-├── assets/          # CSS、JS 和图片资源
-├── includes/        # PHP 类文件
-├── languages/       # 翻译文件
-├── templates/       # 模板文件
-├── vendor/          # Composer 依赖
-└── help-platform.php # 主插件文件
+├── assets/
+│   ├── css/
+│   └── js/
+├── includes/
+│   ├── class-help-platform-branch.php
+│   ├── class-help-platform-commission.php
+│   └── class-help-platform-db.php
+├── languages/
+│   └── help-platform-zh_CN.po
+├── templates/
+│   ├── admin-branch-commission.php
+│   ├── admin-branch-statistics.php
+│   └── admin-commission.php
+├── tests/
+│   ├── bootstrap.php
+│   └── class-help-platform-test.php
+├── help-platform.php
+├── phpunit.xml
+└── README.md
 ```
 
-### 开发环境设置
-1. 克隆仓库
+### 运行测试
+
+1. 安装PHPUnit
+2. 运行测试安装脚本:
 ```bash
-git clone https://github.com/your-username/help-platform.git
+bin/install-wp-tests.sh wordpress_test root root localhost latest
 ```
-
-2. 安装依赖
+3. 运行测试:
 ```bash
-composer install
+phpunit
 ```
 
-3. 配置开发环境
-- 复制 `.env.example` 为 `.env`
-- 修改配置参数
+### 添加新功能
 
-### 贡献指南
-1. Fork 项目
-2. 创建特性分支 (`git checkout -b feature/AmazingFeature`)
-3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
-4. 推送到分支 (`git push origin feature/AmazingFeature`)
-5. 创建 Pull Request
+1. 在`includes/`目录下创建新的类文件
+2. 在`help-platform.php`中加载新类
+3. 在`templates/`目录下创建新的模板文件
+4. 在`languages/`目录下更新语言文件
+5. 在`tests/`目录下添加新的测试用例
 
-## 版本历史
+## 贡献指南
 
-- 1.0.0
-  - 初始版本发布
-  - 基础功能实现
-  - 实名认证系统
-  - 任务管理
-  - 财务管理
-  - 工人管理
+1. Fork本仓库
+2. 创建新的功能分支
+3. 提交更改
+4. 推送到分支
+5. 创建Pull Request
 
 ## 许可证
 
-本项目采用 GPL v2 或更高版本许可证 - 查看 [LICENSE](LICENSE) 文件了解详情
+GPL v2 或更高版本
 
 ## 联系方式
 
-- 项目维护者：HELP Team
-- 项目链接：https://github.com/your-username/help-platform
-- 官方网站：https://help-platform.com 
+- 网站: https://help-platform.com
+- 邮箱: support@help-platform.com 

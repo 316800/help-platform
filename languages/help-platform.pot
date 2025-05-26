@@ -1,17 +1,239 @@
-# Copyright (C) 2024 HELP Team
+# Copyright (C) 2024 Help Platform
 msgid ""
 msgstr ""
-"Project-Id-Version: HELP 全球生活服务平台 1.0.0\n"
-"Report-Msgid-Bugs-To: https://help-platform.com\n"
-"POT-Creation-Date: 2024-03-21 12:00+0800\n"
-"PO-Revision-Date: 2024-03-21 12:00+0800\n"
-"Last-Translator: HELP Team\n"
-"Language-Team: HELP Team\n"
-"Language: \n"
+"Project-Id-Version: Help Platform\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/help-platform\n"
+"POT-Creation-Date: 2024-03-21 12:00+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"PO-Revision-Date: 2024-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: templates/verify-form.php:12
+msgid "您的认证申请正在审核中，请耐心等待。"
+msgstr ""
+
+#: templates/verify-form.php:16
+msgid "您的认证申请未通过，原因："
+msgstr ""
+
+#: templates/verify-form.php:19
+msgid "重新提交"
+msgstr ""
+
+#: templates/verify-form.php:28
+msgid "基本信息"
+msgstr ""
+
+#: templates/verify-form.php:31
+msgid "姓名"
+msgstr ""
+
+#: templates/verify-form.php:36
+msgid "国家/地区"
+msgstr ""
+
+#: templates/verify-form.php:38
+msgid "请选择"
+msgstr ""
+
+#: templates/verify-form.php:39
+msgid "中国"
+msgstr ""
+
+#: templates/verify-form.php:40
+msgid "美国"
+msgstr ""
+
+#: templates/verify-form.php:41
+msgid "西班牙"
+msgstr ""
+
+#: templates/verify-form.php:47
+msgid "证件类型"
+msgstr ""
+
+#: templates/verify-form.php:49
+msgid "身份证"
+msgstr ""
+
+#: templates/verify-form.php:50
+msgid "护照"
+msgstr ""
+
+#: templates/verify-form.php:51
+msgid "驾驶证"
+msgstr ""
+
+#: templates/verify-form.php:52
+msgid "其他"
+msgstr ""
+
+#: templates/verify-form.php:57
+msgid "证件号码"
+msgstr ""
+
+#: templates/verify-form.php:64
+msgid "联系电话"
+msgstr ""
+
+#: templates/verify-form.php:77
+msgid "电子邮箱"
+msgstr ""
+
+#: templates/verify-form.php:85
+msgid "专业信息"
+msgstr ""
+
+#: templates/verify-form.php:88
+msgid "专业领域"
+msgstr ""
+
+#: templates/verify-form.php:90
+msgid "清洁服务"
+msgstr ""
+
+#: templates/verify-form.php:91
+msgid "维修服务"
+msgstr ""
+
+#: templates/verify-form.php:92
+msgid "搬家服务"
+msgstr ""
+
+#: templates/verify-form.php:93
+msgid "园艺服务"
+msgstr ""
+
+#: templates/verify-form.php:99
+msgid "工作经验"
+msgstr ""
+
+#: templates/verify-form.php:101
+msgid "1年以下"
+msgstr ""
+
+#: templates/verify-form.php:102
+msgid "1-3年"
+msgstr ""
+
+#: templates/verify-form.php:103
+msgid "3-5年"
+msgstr ""
+
+#: templates/verify-form.php:104
+msgid "5年以上"
+msgstr ""
+
+#: templates/verify-form.php:109
+msgid "专业介绍"
+msgstr ""
+
+#: templates/verify-form.php:111
+msgid "请详细介绍您的专业技能、服务经验等"
+msgstr ""
+
+#: templates/verify-form.php:117
+msgid "技能证书"
+msgstr ""
+
+#: templates/verify-form.php:121
+msgid "支持PDF、JPG、PNG格式，最多5个文件"
+msgstr ""
+
+#: templates/verify-form.php:137
+msgid "身份验证"
+msgstr ""
+
+#: templates/verify-form.php:141
+msgid "证件照片"
+msgstr ""
+
+#: templates/verify-form.php:144
+msgid "证件正面"
+msgstr ""
+
+#: templates/verify-form.php:152
+msgid "证件背面"
+msgstr ""
+
+#: templates/verify-form.php:160
+msgid "手持证件照片"
+msgstr ""
+
+#: templates/verify-form.php:176
+msgid "我已阅读并同意"
+msgstr ""
+
+#: templates/verify-form.php:178
+msgid "隐私政策"
+msgstr ""
+
+#: templates/verify-form.php:180
+msgid "和"
+msgstr ""
+
+#: templates/verify-form.php:182
+msgid "服务条款"
+msgstr ""
+
+#: templates/verify-form.php:189
+msgid "提交认证"
+msgstr ""
+
+#: templates/verify-form.php:191
+msgid "提交中..."
+msgstr ""
+
+#: templates/verify-form.php:193
+msgid "提交失败，请重试"
+msgstr ""
+
+#: includes/class-help-platform-ajax.php:12
+msgid "请先登录"
+msgstr ""
+
+#: includes/class-help-platform-ajax.php:17
+msgid "您没有权限提交认证"
+msgstr ""
+
+#: includes/class-help-platform-ajax.php:35
+msgid "请填写%s"
+msgstr ""
+
+#: includes/class-help-platform-ajax.php:40
+msgid "请输入有效的电子邮箱"
+msgstr ""
+
+#: includes/class-help-platform-ajax.php:46
+msgid "请输入有效的电话号码"
+msgstr ""
+
+#: includes/class-help-platform-ajax.php:63
+msgid "不支持的文件类型"
+msgstr ""
+
+#: includes/class-help-platform-ajax.php:71
+msgid "文件上传失败"
+msgstr ""
+
+#: includes/class-help-platform-ajax.php:74
+msgid "请上传所有必需的证件照片"
+msgstr ""
+
+#: includes/class-help-platform-ajax.php:118
+msgid "[%s] 新的实名认证申请"
+msgstr ""
+
+#: includes/class-help-platform-ajax.php:121
+msgid "用户 %s 提交了实名认证申请，请登录后台审核。"
+msgstr ""
+
+#: includes/class-help-platform-ajax.php:124
+msgid "认证申请已提交，请等待审核"
+msgstr ""
 
 #: help-platform.php:31
 msgid "实名认证"

@@ -1,85 +1,133 @@
 <?php
 /**
- * Plugin Name: HELP 全球生活服务平台
+ * Plugin Name: HELP Platform
  * Plugin URI: https://help-platform.com
- * Description: HELP 全球生活服务平台插件，支持实名认证、任务发布、前端短代码调用与后台审核管理
- * Version: 1.0.2
- * Author: HELP Team
+ * Description: HELP Platform 是一个帮助管理分公司、工作者和任务的WordPress插件。
+ * Version: 1.0.0
+ * Author: HELP Platform Team
  * Author URI: https://help-platform.com
  * Text Domain: help-platform
  * Domain Path: /languages
- * License: GPL v2 or later
  */
 
-// 防止直接访问
 if (!defined('ABSPATH')) {
     exit;
 }
 
 // 定义插件常量
 define('HELP_PLATFORM_VERSION', '1.0.2');
+define('HELP_PLATFORM_PLUGIN_FILE', __FILE__);
 define('HELP_PLATFORM_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('HELP_PLATFORM_PLUGIN_URL', plugin_dir_url(__FILE__));
-define('HELP_PLATFORM_PLUGIN_BASENAME', plugin_basename(__FILE__));
 
-// 加载语言文件
+// 加载必要的类文件
+require_once HELP_PLATFORM_PLUGIN_DIR . 'includes/class-help-platform-db.php';
+require_once HELP_PLATFORM_PLUGIN_DIR . 'includes/class-help-platform-branch.php';
+require_once HELP_PLATFORM_PLUGIN_DIR . 'includes/class-help-platform-commission.php';
+
+// 引入插件函数文件，确保函数定义生效
+require_once( HELP_PLATFORM_PLUGIN_DIR . 'includes/plugin-functions.php');
+
+/**
+ * 插件激活时执行
+ */
+function help_platform_activate() {
+    // 获取数据库中的版本，如果不存在则默认为"1.0.0"
+    $db_version = get_option( 'help_platform_db_version', '1.0.0' );
+    if ( version_compare( $db_version, HELP_PLATFORM_VERSION, '<' ) ) {
+        // 执行数据库迁移（例如，调用 help_platform_db_migrate() 函数，更新表结构、迁移选项等）
+        help_platform_db_migrate();
+        // 更新数据库版本
+        update_option( 'help_platform_db_version', HELP_PLATFORM_VERSION );
+    }
+    // 初始化数据库（例如，创建表、添加角色等）
+    help_platform_db_init();
+    // 添加管理员角色
+    add_role(
+        'help_platform_admin',
+        __( 'HELP Platform 管理员', 'help-platform' ),
+        array(
+            'read' => true,
+            'manage_options' => true,
+            'manage_help_platform' => true,
+            'manage_help_platform_finance' => true,
+            'manage_help_platform_users' => true,
+            'manage_help_platform_tasks' => true,
+        )
+    );
+    // 刷新重写规则
+    flush_rewrite_rules();
+}
+register_activation_hook(__FILE__, 'help_platform_activate');
+
+/**
+ * 插件停用时执行
+ */
+function help_platform_deactivate() {
+    // 刷新重写规则
+    flush_rewrite_rules();
+}
+register_deactivation_hook(__FILE__, 'help_platform_deactivate');
+
+/**
+ * 插件卸载时执行
+ */
+function help_platform_uninstall() {
+    // 删除数据库表
+    $db = help_platform_db_init();
+    $db->drop_tables();
+
+    // 删除角色
+    remove_role('help_platform_admin');
+    remove_role('help_branch_manager');
+
+    // 删除选项
+    delete_option('help_platform_db_version');
+}
+register_uninstall_hook(__FILE__, 'help_platform_uninstall');
+
+/**
+ * 加载文本域
+ */
 function help_platform_load_textdomain() {
     load_plugin_textdomain('help-platform', false, dirname(plugin_basename(__FILE__)) . '/languages');
 }
 add_action('plugins_loaded', 'help_platform_load_textdomain');
 
-// 添加主菜单
+/**
+ * 添加管理菜单
+ */
 function help_platform_add_menu() {
     add_menu_page(
-        __('HELP 平台', 'help-platform'),
-        __('HELP 平台', 'help-platform'),
+        __( 'HELP Platform', 'help-platform' ),
+        __( 'HELP Platform', 'help-platform' ),
         'manage_options',
         'help-platform',
-        'help_platform_main_page',
-        'dashicons-admin-generic',
+        'help_platform_admin_page',
+        'dashicons-store',
         30
-    );
-
-    // 添加子菜单
-    add_submenu_page(
-        'help-platform',
-        __('平台设置', 'help-platform'),
-        __('平台设置', 'help-platform'),
-        'manage_options',
-        'help-platform-settings',
-        'help_platform_settings_page'
     );
 }
 add_action('admin_menu', 'help_platform_add_menu');
 
-// 主页面
-function help_platform_main_page() {
-    echo '<div class="wrap">';
-    echo '<h1>' . __('HELP 平台管理', 'help-platform') . '</h1>';
-    echo '<p>' . __('欢迎使用 HELP 平台插件。', 'help-platform') . '</p>';
-    echo '</div>';
+/**
+ * 渲染管理页面
+ */
+function help_platform_admin_page() {
+    include HELP_PLATFORM_PLUGIN_DIR . 'templates/admin-dashboard.php';
 }
 
-// 设置页面
-function help_platform_settings_page() {
-    if (isset($_POST['help_platform_settings_nonce']) && wp_verify_nonce($_POST['help_platform_settings_nonce'], 'help_platform_settings')) {
-        // 保存设置
-        update_option('help_platform_settings', array(
-            'verify_required' => isset($_POST['verify_required']) ? true : false,
-            'job_approval' => isset($_POST['job_approval']) ? true : false,
-            'payment_enabled' => isset($_POST['payment_enabled']) ? true : false,
-        ));
-        echo '<div class="notice notice-success"><p>' . __('设置已保存。', 'help-platform') . '</p></div>';
+/**
+ * 添加设置链接
+ */
+function help_platform_add_settings_link($links) {
+    if (current_user_can('manage_options')) {
+        $settings_link = '<a href="' . admin_url('admin.php?page=help-platform') . '">' . __('设置', 'help-platform') . '</a>';
+        array_unshift($links, $settings_link);
     }
-
-    $settings = get_option('help_platform_settings', array(
-        'verify_required' => true,
-        'job_approval' => true,
-        'payment_enabled' => false,
-    ));
-
-    include HELP_PLATFORM_PLUGIN_DIR . 'templates/admin-settings.php';
+    return $links;
 }
+add_filter('plugin_action_links_' . plugin_basename(__FILE__), 'help_platform_add_settings_link');
 
 // 注册自定义文章类型
 function help_platform_register_post_types() {
@@ -314,39 +362,6 @@ function help_platform_handle_form_submit() {
     }
 }
 add_action('wp_ajax_help_platform_submit', 'help_platform_handle_form_submit');
-
-// 激活插件时的操作
-function help_platform_activate() {
-    // 创建必要的目录
-    $upload_dir = wp_upload_dir();
-    $verify_dir = $upload_dir['basedir'] . '/help-platform/verify';
-    $job_dir = $upload_dir['basedir'] . '/help-platform/job';
-
-    if (!file_exists($verify_dir)) {
-        wp_mkdir_p($verify_dir);
-    }
-    if (!file_exists($job_dir)) {
-        wp_mkdir_p($job_dir);
-    }
-
-    // 添加默认设置
-    add_option('help_platform_settings', array(
-        'verify_required' => true,
-        'job_approval' => true,
-        'payment_enabled' => false,
-    ));
-
-    // 刷新重写规则
-    flush_rewrite_rules();
-}
-register_activation_hook(__FILE__, 'help_platform_activate');
-
-// 停用插件时的操作
-function help_platform_deactivate() {
-    // 刷新重写规则
-    flush_rewrite_rules();
-}
-register_deactivation_hook(__FILE__, 'help_platform_deactivate');
 
 // 注册消息文章类型
 function help_platform_register_message_post_type() {
